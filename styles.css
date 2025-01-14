@@ -20,6 +20,7 @@
     --mobile-padding: 1rem;
     --tablet-padding: 2rem;
     --desktop-padding: 4rem;
+    --hover: rgba(0, 0, 0, 0.1);
 }
 
 :root.dark-mode {
@@ -29,6 +30,7 @@
     --text-secondary: #ffffff;
     --container: #292929;
     --brand-accent: #4A6DFD;
+    --hover: rgba(255, 255, 255, 0.1);
 }
 
 /* Add specific dark mode overrides */
@@ -95,18 +97,45 @@
 
 /* Ensure button visibility and style */
 #darkModeToggle {
-    background-color: transparent;
-    border: none;
-    padding: 8px;
     cursor: pointer;
+    padding: 8px;
     border-radius: 50%;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 1000;
 }
 
 #darkModeToggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--hover);
 }
 
-/* Add smooth transitions */
+#darkModeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+#darkModeIcon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    fill: none;
+}
+
+.dark-mode #darkModeToggle {
+    color: var(--text-secondary);
+    background-color: transparent;
+}
+
+/* transitions */
 body, .navbar li a, .container, .hero, .result {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -115,6 +144,29 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure focus states are visible */
+button:focus, a:focus {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+}
+
+.textField,
+.button {
+    width: 300px;
+    margin: 10px;
+}
+
+.btn-blue {
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    padding: 1rem;
+    background-color: #0066FF;
+    color: #ffffff;
+    transform: scale(1.01);
+    transition: 100ms ease-in-out;
 }
 
 .round-em {
@@ -177,24 +229,20 @@ body {
     color: var(--text-primary);
     text-align: center;
     padding: 14px 20px;
+    border-radius: 30px;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar li a:hover {
-    text-decoration: underline;
+.navbar a:hover {
+    background-color:var(--hover);
 }
 
 .navbar button {
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    padding: 8px;
 }
 
 .navbar button svg {
@@ -207,30 +255,71 @@ body {
     padding: 15px;
 }
 
-
 .hero {
-    background-color: var(--bg-secondary);
-    padding: 50px 20px;
+    position: relative;
+    min-height: 600px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #0629AF, #2A47D5, #4A6DFD);
     border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin: var(--spacing-lg) 0;
+    overflow: hidden;
     padding: var(--spacing-xl) var(--spacing-lg);
-    background: linear-gradient(to bottom right,
-            #0629AF,
-            #2A47D5,
-            #4A6DFD);
-    color: white;
-    transform: translateZ(0);
-    will-change: transform;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-lg);
     margin: var(--spacing-md) auto;
     max-width: min(90%, 1200px);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.hero-icon {
+    position: absolute;
+    right: -5%;
+    bottom: -5%;
+    width: 70%;
+    height: 70%;
+    opacity: 0.1;
+    transform: rotate(-10deg);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.hero-content h1 {
+    margin-bottom: var(--spacing-md);
+    font-size: 2.5rem;
+}
+
+.hero-content p {
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.2rem;
+    opacity: 0.9;
 }
 
 /* Change .boks color if desired */
@@ -460,8 +549,18 @@ p {
 
 @media (max-width: 768px) {
     .hero {
-        flex-direction: column;
-        text-align: center;
+        min-height: auto;
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-icon {
+        width: 80%;
+        height: 80%;
+        opacity: 0.08;
     }
 
     .leftside,
@@ -638,4 +737,103 @@ p {
 .hero-icon {
     transform: scale(0.5);
     transform-origin: right;
+}
+
+/* Calculator Form Styles */
+.calculator-form {
+    margin: var(--spacing-lg) auto;
+    background: var(--container);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    background: var(--container);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.form-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper .modern-input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    font-size: 1rem;
+    border: 2px solid var(--brand-accent);
+    background-color: var(--bg-primary);
+    transition: all 0.2s ease;
+}
+
+.input-wrapper .input-icon {
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+    font-size: 1.2rem;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    background-color: var(--brand-accent);
+    color: var(--text-secondary);
+    border: none;
+    margin-top: var(--spacing-md);
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(48, 90, 250, 0.25);
+}
+
+.button-icon {
+    font-size: 1.2rem;
+}
+
+.modern-input:focus {
+    border-color: var(--brand-accent);
+    box-shadow: 0 0 0 3px rgba(48, 90, 250, 0.15);
+}
+
+.modern-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .modern-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }

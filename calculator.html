@@ -2,114 +2,195 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Caffeine & Sleep Calc.</title>
-    <meta name="description" content="Calculate your optimal caffeine cutoff time for better sleep">
-    <meta name="theme-color" content="#305AFA" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#232323" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta
+      name="description"
+      content="Calculate your optimal caffeine cutoff time for better sleep"
+    />
+    <meta
+      name="theme-color"
+      content="#305AFA"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#232323"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
-    <div class="navbar">
-      <ul>
-        <li class="logo">
-          <a href="#calculator">Caffeine & Sleep Calculator</a>
-        </li>
-        <div class="nav-links">
-          <li>
-            <button id="darkModeToggle">
-              <span id="darkModeIcon">
-              </span>
-            </button>
+    <header class="navbar">
+      <nav>
+        <ul>
+          <li class="logo">
+            <a href="#calculator">Caffeine & Sleep Calculator</a>
           </li>
-          <li><a href="#sleep">Caffeine & Sleep</a></li>
-          <li><a href="#feedback">Feedback</a></li>
-        </div>
-      </ul>
-    </div>
-
-    <div class="main-container">
-      <div class="main">
-        <div class="hero">
-          <div class="leftside">
-            <h1>Sleep better. Discover your personalized <u>caffeine cutoff-time.</u></h1>
-            <p>"When can I drink todays last Coffee?"</p>
-            <button id="cta" class="modern-button">Find Your Cutoff →</button>
+          <div class="nav-links">
+            <li>
+              <button id="darkModeToggle" aria-label="Toggle dark mode">
+                <span id="darkModeIcon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                  </svg>
+                </span>
+              </button>
+            </li>
+            <li><a href="#sleep">Caffeine & Sleep</a></li>
+            <li><a href="#feedback">Feedback</a></li>
           </div>
-          <div class="rightside">
-            <svg class="hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main-container">
+      <section class="main">
+        <div class="hero">
+          <div class="hero-background">
+            <svg
+              class="hero-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
               <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
               <line x1="6" y1="1" x2="6" y2="4"></line>
               <line x1="10" y1="1" x2="10" y2="4"></line>
               <line x1="14" y1="1" x2="14" y2="4"></line>
             </svg>
-            
           </div>
-        </div>
-
-        <div class="hero"> 
-          <div id="calculator" class="container">
-            <h3 class="animated-header">Your Bedtime</h3>
-            <div class="input-container">
-              <input
-                type="time"
-                id="bedtimeInput"
-                class="modern-input"
-                step="900"
-              />
-              <button onclick="lastDrinkTime()" class="modern-button">Submit</button>
-              <div>
-                <label for="formatSwitch">24-Hour Format</label>
-                <input type="checkbox" id="formatSwitch" class="modern-checkbox" />
-              </div>
+          <div class="hero-content">
+            <h1>Sleep better. Discover your personalized <span class="round-em">caffeine cutoff-time.</span></h1>
+            <p>"When can I drink last Coffee?"</p>
+            <div id="calculator">
+              <form class="calculator-form" onsubmit="event.preventDefault(); lastDrinkTime();">
+                <div class="form-grid">
+                      <div class="form-group">
+                          <label for="weightInput">Weight (kg)</label>
+                          <div class="input-wrapper">
+                              <input 
+                                  type="number" 
+                                  id="weightInput" 
+                                  class="modern-input" 
+                                  min="1" 
+                                  placeholder="Enter your weight"
+                                  required 
+                              />
+                              <span class="input-icon">⚖️</span>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="ageInput">Age</label>
+                          <div class="input-wrapper">
+                              <input 
+                                  type="number" 
+                                  id="ageInput" 
+                                  class="modern-input" 
+                                  min="1" 
+                                  placeholder="Enter your age"
+                                  required 
+                              />
+                              <span class="input-icon">📅</span>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="bedtimeInput">Bedtime</label>
+                          <div class="input-wrapper">
+                              <input 
+                                  type="time" 
+                                  id="bedtimeInput" 
+                                  class="modern-input" 
+                                  step="900" 
+                                  required 
+                              />
+                              <span class="input-icon">🛏️</span>
+                          </div>
+                      </div>
+                  </div>
+                  <button type="submit" class="submit-button button btn-blue">
+                      Calculate Cutoff Time
+                      <span class="button-icon">⏰</span>
+                  </button>
+              </form>
             </div>
           </div>
         </div>
+
         <div class="result">
           <p id="result-text"></p>
           <h1 id="result-time" class="result-time animated"></h1>
         </div>
-        <div class="boks info-section">
-            <h2>How It Works</h2>
-            <div class="info-grid">
-              <div class="info-item">
-                <h3>Science-Based</h3>
-                <p>Using caffeine half-life data to calculate your optimal cutoff time.</p>
-              </div>
-              <div class="info-item">
-                <h3>Personalized</h3>
-                <p>Based on your specific sleep schedule for better results.</p>
-              </div>
+        <section class="boks info-section">
+          <h2>How It Works</h2>
+          <div class="info-grid">
+            <div class="info-item">
+              <h3>Science-Based</h3>
+              <p>
+                Using caffeine half-life data to calculate your optimal cutoff
+                time.
+              </p>
             </div>
-            <h2>How This Calculator Works</h2>
-            <p><b>Calculation: </b>It's really basic. We subtract 6 hours from your chosen bedtime to <em>estimate</em> a caffeine cutoff. It's only a rough guideline as tolerance varies from person to person.</p>
-            <p><b>Privacy: </b>No data is collected or stored. This is not medical advice; consult a professional for specific needs. We hope it helps you rest better!</p>
-        </div>
-        <div id="sleep" class="boks info-section">
+            <div class="info-item">
+              <h3>Personalized</h3>
+              <p>Based on your specific sleep schedule for better results.</p>
+            </div>
+          </div>
+          <h2>How This Calculator Works</h2>
+          <p>
+            <b>Calculation: </b>It's really basic. We subtract 6 hours from your
+            chosen bedtime to <em>estimate</em> a caffeine cutoff. It's only a
+            rough guideline as tolerance varies from person to person.
+          </p>
+          <p>
+            <b>Privacy: </b>No data is collected or stored. This is not medical
+            advice; consult a professional for specific needs. We hope it helps
+            you rest better!
+          </p>
+        </section>
+        <section id="sleep" class="boks info-section">
           <h2>Understanding Caffeine and Sleep</h2>
-          <p>Caffeine is a stimulant that temporarily boosts focus and energy but can interfere with restful sleep when consumed too late in the day.</p>
+          <p>
+            Caffeine is a stimulant that temporarily boosts focus and energy but
+            can interfere with restful sleep when consumed too late in the day.
+          </p>
           <h3>How Caffeine Affects Your Body</h3>
-          <p>Caffeine’s half-life is around 5-6 hours, meaning half of what you consume can still be in your system by bedtime if you don’t time it well.</p>
+          <p>
+            Caffeine’s half-life is around 5-6 hours, meaning half of what you
+            consume can still be in your system by bedtime if you don’t time it
+            well.
+          </p>
           <h3>Tips for Balancing Caffeine & Sleep</h3>
           <ul>
             <li>Avoid consuming caffeine within 4-8 hours before bedtime.</li>
             <li>Opt for decaf or herbal teas in the afternoon and evening.</li>
             <li>Stay hydrated and maintain a regular sleep routine.</li>
           </ul>
-        </div>
-        <div id="feedback" class="boks">
+        </section>
+        <section id="feedback" class="boks">
           <h2>Feedback</h2>
           <p>We'd love to hear your thoughts on improving the calculator!</p>
-          
+
           <div class="feedback-guide">
             <h3>How to Send Feedback</h3>
-            <p>Please email us at <strong>feedback@example.com</strong> with:</p>
+            <p>
+              Please email us at <strong>feedback@example.com</strong> with:
+            </p>
             <ul>
-              <li>📋 <strong>Title:</strong> Brief description of your feedback</li>
-              <li>🏷️ <strong>Topic:</strong> Choose one:
+              <li>
+                📋 <strong>Title:</strong> Brief description of your feedback
+              </li>
+              <li>
+                🏷️ <strong>Topic:</strong> Choose one:
                 <ul>
                   <li>Feature Request</li>
                   <li>Bug Report</li>
@@ -119,7 +200,8 @@
                   <li>Other</li>
                 </ul>
               </li>
-              <li>📝 <strong>Details:</strong> Please include:
+              <li>
+                📝 <strong>Details:</strong> Please include:
                 <ul>
                   <li>Clear description of the issue/suggestion</li>
                   <li>Steps to reproduce (for bugs)</li>
@@ -128,25 +210,33 @@
                 </ul>
               </li>
             </ul>
-            
-            <a href="mailto:feedback@example.com?subject=Caffeine Calculator Feedback: [Your Topic]" 
-               class="modern-button email-button">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
+
+            <a
+              href="mailto:feedback@example.com?subject=Caffeine Calculator Feedback: [Your Topic]"
+              class="modern-button email-button"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
               </svg>
               Send Feedback Email
             </a>
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
+      </section>
+    </main>
 
     <footer class="footer">
       <div class="footer-content">
-        <div class="footer-copyright">
-          © 2024 Caffeine & Sleep Calculator
-        </div>
+        <div class="footer-copyright">© 2024 Caffeine & Sleep Calculator</div>
         <div class="footer-links">
           <a href="#calculator">Calculator</a>
           <a href="#sleep">Caffeine & Sleep</a>
