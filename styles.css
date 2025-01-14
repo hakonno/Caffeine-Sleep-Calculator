@@ -1,0 +1,641 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #305AFA;
+    --text-primary: #292929;
+    --text-secondary: #ffffff;
+    --container: #ffffff;
+    --brand-accent: #305AFA;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+    --container-max-width: 1200px;
+    --mobile-padding: 1rem;
+    --tablet-padding: 2rem;
+    --desktop-padding: 4rem;
+}
+
+:root.dark-mode {
+    --bg-primary: #232323;
+    --bg-secondary: #305AFA;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --container: #292929;
+    --brand-accent: #4A6DFD;
+}
+
+/* Add specific dark mode overrides */
+:root.dark-mode .navbar {
+    background-color: var(--bg-primary);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Remove the separate :root.dark-mode .hero gradient for clarity */
+
+:root.dark-mode .boks {
+    background-color: var(--container);
+}
+
+:root.dark-mode .footer {
+    background-color: var(--container);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Add dark mode color overrides */
+.dark-mode .navbar li a {
+    color: #ffffff;
+}
+
+.dark-mode .container {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+.dark-mode .hero {
+    background: linear-gradient(to bottom right,
+        #0629AF,
+        #2A47D5,
+        #4A6DFD);
+}
+
+.dark-mode #darkModeToggle {
+    color: #ffffff;
+}
+
+.dark-mode .result {
+    color: #ffffff;
+}
+
+.dark-mode .modern-button {
+    background-color: var(--container);
+    color: var(--text-primary);
+}
+
+.dark-mode .modern-input {
+    background-color: var(--container);
+    color: var(--text-primary);
+}
+
+.dark-mode .modern-input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* Ensure dark mode toggle button is transparent and white in dark mode */
+.dark-mode .navbar button {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+/* Ensure button visibility and style */
+#darkModeToggle {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#darkModeToggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Add smooth transitions */
+body, .navbar li a, .container, .hero, .result {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.round-em {
+    padding: 5px 13px;
+    margin-bottom: 13px;
+    background-color: #0000005b;
+    color: #ffffff;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+    display: inline-block; /* Sørg for at elementet oppfører seg mer som en blokk */
+    vertical-align: middle; /* Eller bruk "baseline" om det passer bedre */
+}
+
+.navbar {
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 100;
+    padding: var(--mobile-padding);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.navbar .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--brand-accent);
+    text-align: center;
+}
+
+.navbar .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: var(--text-primary);
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar li a:hover {
+    text-decoration: underline;
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.navbar button svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.main {
+    padding: 15px;
+}
+
+
+.hero {
+    background-color: var(--bg-secondary);
+    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background: linear-gradient(to bottom right,
+            #0629AF,
+            #2A47D5,
+            #4A6DFD);
+    color: white;
+    transform: translateZ(0);
+    will-change: transform;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md) auto;
+    max-width: min(90%, 1200px);
+}
+
+/* Change .boks color if desired */
+.boks {
+    background-color: var(--container);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(28, 28, 28, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-md);
+    max-width: min(90%, 1200px);
+}
+
+.leftside {
+    flex: 1;
+    padding: 20px;
+}
+
+.rightside {
+    flex: 1;
+    padding: 20px;
+}
+
+.result {
+    text-align: center;
+    font-size: 200%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.container {
+    background-color: var(--container);
+    color: var(--text-secondary);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.342);
+    border-radius: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* margin: 0 auto; */
+    padding: var(--spacing-md);
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--mobile-padding);
+    
+    padding: 50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    align-items: center;
+    max-width: min-content;
+}
+
+#darkModeToggle {
+    color: var(--text-primary);
+}
+
+/* transitions */
+body,
+.navbar li a,
+.container,
+.hero,
+.result {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modern-button {
+    padding: 10px 20px;
+    border: 2px solid var(--brand-accent);
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.modern-button:hover {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(48, 90, 250, 0.15);
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.modern-input {
+    padding: 8px;
+    border: 2px solid var(--brand-accent);
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.modern-input:focus {
+    outline: none;
+    box-shadow: 0 0 6px var(--brand-accent);
+}
+
+.modern-input[type="time"] {
+    padding: 8px 12px;
+    min-width: 150px;
+    color-scheme: var(--bg-primary);
+}
+
+.modern-input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0);
+}
+
+.modern-checkbox {
+    accent-color: var(--brand-accent);
+    width: 20px;
+    height: 20px;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.feedback-form textarea {
+    min-height: 150px;
+    resize: vertical;
+    padding: 12px;
+    border: 2px solid var(--brand-accent);
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.feedback-form textarea:focus {
+    outline: none;
+    box-shadow: 0 0 6px var(--brand-accent);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 500;
+}
+
+.footer {
+    margin-top: 50px;
+    padding: 30px 15px;
+    background-color: var(--container);
+    color: var(--text-primary);
+    text-align: center;
+    border-top: 1px solid var(--brand-accent);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .leftside,
+    .rightside {
+        padding: var(--spacing-md);
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    .navbar .logo {
+        font-size: x-large;
+    }
+}
+
+/* Mobile navigation */
+@media (max-width: 600px) {
+    .navbar ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: var(--mobile-padding);
+        margin: var(--mobile-padding) 0;
+    }
+
+    .boks {
+        margin: var(--mobile-padding) 0;
+        padding: var(--mobile-padding);
+    }
+}
+
+/* Tablet layout */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .hero {
+        padding: var(--tablet-padding);
+    }
+
+    .main {
+        padding: var(--tablet-padding);
+    }
+}
+
+/* Touch-friendly targets */
+@media (hover: none) {
+
+    .modern-button,
+    .navbar li a {
+        padding: 1rem 1.5rem;
+        min-height: 44px;
+    }
+
+    .modern-input[type="time"] {
+        min-height: 44px;
+    }
+
+    .modern-checkbox {
+        min-width: 24px;
+        min-height: 24px;
+    }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.info-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Print styles */
+@media print {
+
+    .navbar,
+    .footer,
+    .feedback-form {
+        display: none;
+    }
+
+    body {
+        color: black;
+        background: white;
+    }
+
+    .hero {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+/* Hardware acceleration for smooth animations */
+.hero,
+.modern-button:hover,
+.result {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Base container constraints */
+.main-container {
+    max-width: min(90%, 1200px);
+    margin: 0 auto;
+    padding: var(--mobile-padding);
+}
+
+/* Email feedback section */
+.feedback-guide {
+    background: var(--container);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-md);
+}
+
+.feedback-guide ul {
+    list-style: none;
+    padding: 0;
+}
+
+.feedback-guide li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.email-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--spacing-md);
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .navbar ul {
+        flex-direction: row;
+    }
+
+    .navbar .nav-links {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .navbar .logo {
+        font-size: xx-large;
+    }
+
+    .hero {
+        flex-direction: row;
+        padding: var(--spacing-xl);
+    }
+}
+
+.hero-icon {
+    transform: scale(0.5);
+    transform-origin: right;
+}
