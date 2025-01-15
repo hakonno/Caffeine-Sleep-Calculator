@@ -2,6 +2,7 @@
 
 ## Overview
 > *A web-app to answer the question "When can i drink todays last coffee (etc.), while ensuring a good nights sleep?"*
+
 The **Caffeine & Sleep Calculator** is a web application designed to help users optimize their caffeine intake to improve sleep quality. By entering details like bedtime (weight, age, tolerance coming soon) the calculator provides a personalized cutoff time for consuming caffeine. The tool aims to promote better sleep/caffeine habits by using scientific findings, and present it in a simple, UX-friendly way.
 
 ## Features
