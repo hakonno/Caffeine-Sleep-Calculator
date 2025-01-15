@@ -70,6 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Show custom size input if "Custom" is selected
+    const sizeSelect = document.getElementById("sizeSelect");
+    const customSizeGroup = document.getElementById("customSizeGroup");
+    if (sizeSelect) {
+        sizeSelect.addEventListener("change", function() {
+            if (sizeSelect.value === "custom") {
+                customSizeGroup.style.display = "block";
+            } else {
+                customSizeGroup.style.display = "none";
+            }
+        });
+    }
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -132,23 +145,34 @@ document.addEventListener('DOMContentLoaded', () => {
 function lastDrinkTime() {
     // Add loading state
     const resultElement = document.getElementById("result-time");
-    const submitButton = document.querySelector('button[onclick="lastDrinkTime()"]');
+    const submitButton = document.getElementById("calculateButton");
     
     submitButton.disabled = true;
     resultElement.textContent = "Calculating...";
     
     // Simulate calculation delay for smoother UX
     setTimeout(() => {
-        const userBedtime = document.getElementById("bedtimeInput").value; // Returns HH:mm in 24h format
+        // getting users input
+        const bedtime = document.getElementById("bedtimeInput").value; // Returns HH:mm in 24h format
+        const age = document.getElementById("ageInput").value; 
+        const weight = document.getElementById("weightInput").value; 
+        const unitsWeekly = document.getElementById("unitsWeeklyInput").value; 
+        const drink = document.getElementById("drinkSelect").value;
+        let size = document.getElementById("sizeSelect").value;
+        if (size === "custom") {
+            size = document.getElementById("customSizeInput").value;
+        }
+        
+        // check format
         const is24HourFormat = document.getElementById("formatSwitch").checked;
 
         // Create date object from input time
-        const [hours, minutes] = userBedtime.split(':');
+        const [hours, minutes] = bedtime.split(':');
         const bedDate = new Date();
         bedDate.setHours(parseInt(hours), parseInt(minutes));
 
         // Subtract 6 hours for caffeine cutoff
-        bedDate.setHours(bedDate.getHours() - 6);
+        bedDate.setHours(calculateLastDrinkTime(bedDate, drink, size));
 
         // Format the result time
         let resultTime;
@@ -172,6 +196,34 @@ function lastDrinkTime() {
         
         submitButton.disabled = false;
     }, 500);
+}
+
+function maxCaffeine(weight, age){
+    const mgMaxAdultPerKg = 5.7;
+    const mgMaxChildPerKg = 3;
+    const pregnantMax = 200;
+
+    if (age<18){
+        return weight*mgMaxChildPerKg;
+    }
+    else if (age>=18){
+        return weight*mgMaxAdultPerKg;
+    }
+}
+
+function findTolerance(weight, age, unitsWeekly){
+    const maxCaffeine = maxCaffeine(weight, age);
+    
+    return 
+}
+
+function calculateLastDrinkTime(bedDate, drink, size) {
+    // Implement logic to calculate the last drink time based on the selected drink and size
+    // For now, just subtract 6 hours as a placeholder
+    let nyBedTime = bedDate.getHours();
+
+
+    return nyBedTime;
 }
 
 // Scroll the result into view after calculation

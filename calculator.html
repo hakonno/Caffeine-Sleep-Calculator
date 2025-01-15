@@ -36,8 +36,18 @@
             <li>
               <button id="darkModeToggle" aria-label="Toggle dark mode">
                 <span id="darkModeIcon">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+                    />
                   </svg>
                 </span>
               </button>
@@ -70,57 +80,129 @@
             </svg>
           </div>
           <div class="hero-content">
-            <h1>Sleep better. Discover your personalized <span class="round-em">caffeine cutoff-time.</span></h1>
-            <p>"When can I drink last Coffee?"</p>
+            <h1>
+              Sleep better. Discover your personalized
+              <span class="round-em">caffeine cutoff-time.</span>
+            </h1>
+            <p>"When can I drink todays last Coffee?"</p>
             <div id="calculator">
-              <form class="calculator-form" onsubmit="event.preventDefault(); lastDrinkTime();">
+              <form
+                class="calculator-form"
+                onsubmit="event.preventDefault(); lastDrinkTime();"
+              >
                 <div class="form-grid">
-                      <div class="form-group">
-                          <label for="weightInput">Weight (kg)</label>
-                          <div class="input-wrapper">
-                              <input 
-                                  type="number" 
-                                  id="weightInput" 
-                                  class="modern-input" 
-                                  min="1" 
-                                  placeholder="Enter your weight"
-                                  required 
-                              />
-                              <span class="input-icon">⚖️</span>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="ageInput">Age</label>
-                          <div class="input-wrapper">
-                              <input 
-                                  type="number" 
-                                  id="ageInput" 
-                                  class="modern-input" 
-                                  min="1" 
-                                  placeholder="Enter your age"
-                                  required 
-                              />
-                              <span class="input-icon">📅</span>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="bedtimeInput">Bedtime</label>
-                          <div class="input-wrapper">
-                              <input 
-                                  type="time" 
-                                  id="bedtimeInput" 
-                                  class="modern-input" 
-                                  step="900" 
-                                  required 
-                              />
-                              <span class="input-icon">🛏️</span>
-                          </div>
-                      </div>
+                  <div class="form-group">
+                    <label for="weightInput">Weight (kg)</label>
+                    <div class="input-wrapper">
+                      <input
+                        type="number"
+                        id="weightInput"
+                        class="modern-input"
+                        min="1"
+                        placeholder="Enter your weight"
+                        required
+                      />
+                      <span class="input-icon">⚖️</span>
+                    </div>
                   </div>
-                  <button type="submit" class="submit-button button btn-blue">
-                      Calculate Cutoff Time
-                      <span class="button-icon">⏰</span>
-                  </button>
+                  <div class="form-group">
+                    <label for="ageInput">Age</label>
+                    <div class="input-wrapper">
+                      <input
+                        type="number"
+                        id="ageInput"
+                        class="modern-input"
+                        min="1"
+                        max="130"
+                        placeholder="Enter your age"
+                        required
+                      />
+                      <span class="input-icon">📅</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="bedtimeInput">Bedtime</label>
+                    <div class="input-wrapper">
+                      <input
+                        type="time"
+                        id="bedtimeInput"
+                        class="modern-input"
+                        required
+                      />
+                      <span class="input-icon">🛏️</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="unitsWeeklyInput"
+                      >Weekly units of caffeine</label
+                    >
+                    <div class="input-wrapper">
+                      <input
+                        type="number"
+                        id="unitsWeeklyInput"
+                        class="modern-input"
+                        placeholder="Enter # of weekly caffeine units"
+                        required
+                      />
+                      <span class="input-icon">☕</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="drinkSelect">Select your drink</label>
+                    <div class="input-wrapper">
+                      <select id="drinkSelect" class="modern-input" required>
+                        <option value="" disabled selected>Select todays last drink</option>
+                        <option value="espresso">Espresso</option>
+                        <option value="filterCoffee">Filter Coffee</option>
+                        <option value="nespresso">Nespresso</option>
+                        <option value="starbucks">Starbucks Coffee</option>
+                        <option value="mcdonalds">McDonald's Coffee</option>
+                        <option value="redbull">Red Bull</option>
+                        <option value="monster">Monster Energy Drink</option>
+                        <option value="preworkout">Preworkout</option>
+                        <!-- Add more options as needed -->
+                      </select>
+                      <span class="input-icon">☕</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="sizeSelect">Select drink size</label>
+                    <div class="input-wrapper">
+                      <select id="sizeSelect" class="modern-input" required>
+                        <option value="" disabled selected>Select a size</option>
+                        <option value="30">30 ml (Espresso)</option>
+                        <option value="200">200 ml (Coffee cup)</option>
+                        <option value="200">250 ml (Sml. Red Bull)</option>
+                        <option value="300">330 ml (Sml. Energy Drink)</option>
+                        <option value="300">355 ml (Med. Red Bull)</option>
+                        <option value="300">473 ml (Lg. Red Bull)</option>
+                        <option value="500">500 ml (Monster)</option>
+                        <option value="550">550 ml</option>
+                        <option value="750">750 ml</option>
+                        <option value="custom">Custom</option>
+                        <!-- Add more options as needed -->
+                      </select>
+                      <span class="input-icon">📏</span>
+                    </div>
+                  </div>
+                  <div class="form-group" id="customSizeGroup" style="display: none;">
+                    <label for="customSizeInput">Enter custom size (ml)</label>
+                    <div class="input-wrapper">
+                      <input type="number" id="customSizeInput" class="modern-input" min="1" placeholder="Enter custom size in ml" />
+                      <span class="input-icon">📏</span>
+                    </div>
+                  </div>
+                  <div>
+                    
+                  
+                <button
+                  id="calculateButton"
+                  type="submit"
+                  class="submit-button button btn-blue"
+                >
+                  Calculate Cutoff Time
+                  <span class="button-icon">⏰</span>
+                </button>
               </form>
             </div>
           </div>
@@ -129,6 +211,9 @@
         <div class="result">
           <p id="result-text"></p>
           <h1 id="result-time" class="result-time animated"></h1>
+        </div>
+        <input type="checkbox" id="formatSwitch" class="modern-checkbox" /> 24-hour format
+      </div>
         </div>
         <section class="boks info-section">
           <h2>How It Works</h2>
@@ -202,15 +287,7 @@
               </li>
               <li>
                 📝 <strong>Details:</strong> Please include:
-                <ul>
-                  <li>Clear description of the issue/suggestion</li>
-                  <li>Steps to reproduce (for bugs)</li>
-                  <li>Expected vs actual behavior</li>
-                  <li>Your device and browser info</li>
-                </ul>
-              </li>
-            </ul>
-
+                <ul></ul>
             <a
               href="mailto:feedback@example.com?subject=Caffeine Calculator Feedback: [Your Topic]"
               class="modern-button email-button"
