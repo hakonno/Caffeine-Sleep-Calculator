@@ -38,10 +38,7 @@ If you plan to sleep at 11:00 PM:
 - **CSS:** For styling and responsive design.
 - **JavaScript:** For interactive functionality and calculations.
 
-## Getting Started
-
-### Prerequisites
-Ensure you have a web browser and a basic text editor if you wish to modify the code.
+## This repo.: Getting Started
 
 ### Installation
 1. Clone the repository:
@@ -59,12 +56,9 @@ Ensure you have a web browser and a basic text editor if you wish to modify the 
 2. Click the **Calculate Cutoff Time** button.
 3. View your personalized recommendation for caffeine cutoff time.
 
-## Screenshots
-![Screenshot 1](https://via.placeholder.com/400x300.png?text=Calculator+Main+Page)
-![Screenshot 2](https://via.placeholder.com/400x300.png?text=Result+Page)
 
 ## Contribution
-We welcome contributions! To contribute:
+Contributions are welcomed! To contribute:
 1. Fork the repository.
 2. Create a new branch:
    ```bash
