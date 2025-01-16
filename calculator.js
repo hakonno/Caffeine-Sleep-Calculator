@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bedtimeInput.addEventListener("change", (e) => {
             if (e.target.value) {
                 lastDrinkTime();
-                scrollToResult();
+                scrollToElement(".result");
             }
         });
     }
@@ -146,9 +146,11 @@ function lastDrinkTime() {
     // Add loading state
     const resultElement = document.getElementById("result-time");
     const submitButton = document.getElementById("calculateButton");
+    const resultSection = document.querySelector(".result");
     
     submitButton.disabled = true;
     resultElement.textContent = "Calculating...";
+    resultSection.classList.remove("show"); // Ensure it's hidden during calculation
     
     // Simulate calculation delay for smoother UX
     setTimeout(() => {
@@ -193,6 +195,7 @@ function lastDrinkTime() {
         // Display result
         document.getElementById("result-text").textContent = "Latest time for caffeine consumption: ";
         resultElement.textContent = resultTime;
+        resultSection.classList.add("show"); // Show the result section
         
         submitButton.disabled = false;
     }, 500);
@@ -227,7 +230,7 @@ function calculateLastDrinkTime(bedDate, drink, size) {
 }
 
 // Scroll the result into view after calculation
-function scrollToResult() {
-    const resultElement = document.querySelector('.result');
+function scrollToElement(element) {
+    const resultElement = document.querySelector(element);
     resultElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }

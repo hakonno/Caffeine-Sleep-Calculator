@@ -4,13 +4,20 @@
     font-family: 'Inter', sans-serif;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 :root {
-    --bg-primary: #ffffff;
+    --bg-primary: #f6f6f6;
     --bg-secondary: #305AFA;
     --text-primary: #292929;
     --text-secondary: #ffffff;
-    --container: #ffffff;
-    --brand-accent: #305AFA;
+    --container: #ececec;
+    --brand-accent: #264aff;;
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
@@ -24,12 +31,12 @@
 }
 
 :root.dark-mode {
-    --bg-primary: #232323;
+    --bg-primary: #1b1b1b;
     --bg-secondary: #305AFA;
     --text-primary: #ffffff;
     --text-secondary: #ffffff;
-    --container: #292929;
-    --brand-accent: #4A6DFD;
+    --container: hwb(0 15% 85%);
+    --brand-accent: #264aff;
     --hover: rgba(255, 255, 255, 0.1);
 }
 
@@ -190,7 +197,7 @@ button:focus, a:focus {
     top: 0;
     background: var(--bg-primary);
     z-index: 100;
-    padding: var(--mobile-padding);
+    padding: var(--spacing-sm); /* Reduce padding for a smaller navbar */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -201,23 +208,22 @@ button:focus, a:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-    gap: var(--spacing-md);
+    flex-direction: row; /* Ensure the navbar items are in a row */
+    gap: var(--spacing-sm);
 }
 
 .navbar .logo {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Reduce font size for a smaller logo */
     color: var(--brand-accent);
     text-align: center;
 }
 
 .navbar .nav-links {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex-direction: row; /* Ensure the nav links are in a row */
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs); /* Reduce gap between nav links */
 }
 
 .navbar li {
@@ -354,6 +360,14 @@ button:focus, a:focus {
     animation: fadeIn 0.5s ease-out;
     transform: translateZ(0);
     will-change: transform;
+    visibility: hidden; /* changes by script when calc done */
+    opacity: 0; /* Ensure it's hidden initially */
+}
+
+.result.show {
+    visibility: visible;
+    opacity: 1; /* Show the result when calculation is done */
+    transition: opacity 0.5s ease; /* Smooth transition */
 }
 
 .container {
@@ -477,10 +491,12 @@ body,
 .footer {
     margin-top: 50px;
     padding: 30px 15px;
-    background-color: var(--container);
     color: var(--text-primary);
     text-align: center;
     border-top: 1px solid var(--brand-accent);
+    position: relative; /* Default positioning */
+    background-color: var(--container);
+    flex-shrink: 0; /* Prevent shrinking when content overflows */
 }
 
 .footer-content {
@@ -684,6 +700,7 @@ p {
 
 /* Base container constraints */
 .main-container {
+    flex: 1;
     max-width: min(90%, 1200px);
     margin: 0 auto;
     padding: var(--mobile-padding);

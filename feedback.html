@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Caffeine & Sleep Calc.</title>
+    <meta
+      name="description"
+      content="Calculate your optimal caffeine cutoff time for better sleep"
+    />
+    <meta
+      name="theme-color"
+      content="#305AFA"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#232323"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <header class="navbar">
+      <nav>
+        <ul>
+          <li class="logo">
+            <h1><a href="calculator.html">Caffeine & Sleep Calc.</a></h1>
+          </li>
+          <div class="nav-links">
+            <li>
+              <button id="darkModeToggle" aria-label="Toggle dark mode">
+                <span id="darkModeIcon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="caffeine-info.html">Caffeine & Sleep</a></li>
+            <li><a href="feedback.html" onclick="scrollToElement('.feedback')">Feedback</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main-container">
+      <section id="feedback" class="boks">
+        <h2>Feedback</h2>
+        <p>We'd love to hear your thoughts on improving the calculator!</p>
+
+        <div class="feedback-guide">
+          <h3>How to Send Feedback</h3>
+          <p>
+            Please email us at <strong>feedback@example.com</strong> with:
+          </p>
+          <ul>
+            <li>
+              📋 <strong>Title:</strong> Brief description of your feedback
+            </li>
+            <li>
+              🏷️ <strong>Topic:</strong> Choose one:
+              <ul>
+                <li>Feature Request</li>
+                <li>Bug Report</li>
+                <li>User Experience</li>
+                <li>Press Inquiry</li>
+                <li>Partnership</li>
+                <li>Other</li>
+              </ul>
+            </li>
+            <li>
+              📝 <strong>Details:</strong> Please include:
+              <ul></ul>
+          <a
+            href="mailto:feedback@example.com?subject=Caffeine Calculator Feedback: [Your Topic]"
+            class="modern-button email-button"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            Send Feedback Email
+          </a>
+        </div>
+        <a href="calculator.html" class="modern-button">Back to Calculator</a>
+        <a href="caffeine-info.html" class="modern-button">Learn More About Caffeine</a>
+      </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-copyright">© 2025 Caffeine & Sleep Calculator</div>
+          <div class="footer-links">
+            <a href="calculator.html">Calculator</a>
+            <a href="caffeine-info.html">Caffeine & Sleep</a>
+            <a href="feedback.html">Feedback</a>
+          </div>
+        </div>
+      </footer>
+    <script src="calculator.js" defer></script>
+  </body>
+</html>
