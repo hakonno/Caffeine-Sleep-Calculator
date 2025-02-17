@@ -192,23 +192,31 @@ button:focus, a:focus {
 }
 
 .navbar {
-    overflow: hidden;
     position: sticky;
     top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     background: var(--bg-primary);
-    z-index: 100;
-    padding: var(--spacing-sm); /* Reduce padding for a smaller navbar */
+    z-index: 1000;
+    padding: var(--spacing-sm);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transform: translateZ(0); /* Force GPU acceleration */
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row; /* Ensure the navbar items are in a row */
+    list-style: none; /* Remove dots */
+    padding: 0;
+    margin: 0;
     gap: var(--spacing-sm);
 }
 
@@ -224,10 +232,18 @@ button:focus, a:focus {
     flex-direction: row; /* Ensure the nav links are in a row */
     align-items: center;
     gap: var(--spacing-xs); /* Reduce gap between nav links */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: 0;
+    padding: 0;
 }
 
 .navbar li {
     float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
 
 .navbar li a {
@@ -497,6 +513,10 @@ body,
     position: relative; /* Default positioning */
     background-color: var(--container);
     flex-shrink: 0; /* Prevent shrinking when content overflows */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    width: 100%;
 }
 
 .footer-content {
@@ -507,11 +527,17 @@ body,
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+    padding: 0 var(--spacing-md);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
 }
 
 .footer-links {
     display: flex;
     gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-links a {
@@ -598,6 +624,17 @@ p {
 
     .navbar .logo {
         font-size: x-large;
+    }
+
+    .navbar ul,
+    .navbar .nav-links {
+        gap: var(--spacing-xs);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
     }
 }
 
@@ -704,6 +741,11 @@ p {
     max-width: min(90%, 1200px);
     margin: 0 auto;
     padding: var(--mobile-padding);
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    flex: 1;
 }
 
 /* Email feedback section */
@@ -771,6 +813,9 @@ p {
     background: var(--container);
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: var(--spacing-lg) auto;
 }
 
 .form-grid {
@@ -853,4 +898,44 @@ p {
 
 .dark-mode .modern-input::placeholder {
     color: rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --mobile-padding: 0.75rem;
+        --spacing-lg: 1.5rem;
+    }
+
+    .navbar {
+        padding: var(--mobile-padding);
+    }
+
+    .navbar .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .calculator-form {
+        padding: var(--mobile-padding);
+    }
+}
+
+/* Add print media query */
+@media print {
+    .navbar {
+        position: static;
+    }
+}
+
+/* Fix zoom behavior */
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+    .navbar {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    .navbar,
+    .footer {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+    }
 }

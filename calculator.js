@@ -142,6 +142,29 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', handleResize, { passive: true });
 });
 
+function maxCaffeineDaily(weight, age) {
+    // Max recommended caffeine per kg body weight (in mg)
+    const mgMaxAdultPerKg = 6;
+    const mgMaxChildPerKg = 3;
+    const maxPregnantTotal = 200;
+    const maxAdultTotal = 400;
+
+    let maxAmount;
+    if (age < 18) {
+        maxAmount = Math.min(weight * mgMaxChildPerKg, 100);
+    } else {
+        maxAmount = Math.min(weight * mgMaxAdultPerKg, maxAdultTotal);
+    }
+    return maxAmount;
+}
+
+function findTolerance(weight, age, unitsWeekly) {
+    const baseMaxCaffeine = maxCaffeineDaily(weight, age);
+    // Calculate tolerance based on weekly consumption
+    const toleranceFactor = Math.min(1.5, 1 + (unitsWeekly / 100));
+    return baseMaxCaffeine * toleranceFactor;
+}
+
 function lastDrinkTime() {
     // Add loading state
     const resultElement = document.getElementById("result-time");
@@ -151,7 +174,10 @@ function lastDrinkTime() {
     submitButton.disabled = true;
     resultElement.textContent = "Calculating...";
     resultSection.classList.remove("show"); // Ensure it's hidden during calculation
+    resultSection.style.display = "none"; // Ensure it's hidden during calculation
     
+    console.log("Starting calculation...");
+
     // Simulate calculation delay for smoother UX
     setTimeout(() => {
         // getting users input
@@ -165,6 +191,8 @@ function lastDrinkTime() {
             size = document.getElementById("customSizeInput").value;
         }
         
+        console.log("Inputs:", { bedtime, age, weight, unitsWeekly, drink, size });
+
         // check format
         const is24HourFormat = document.getElementById("formatSwitch").checked;
 
@@ -173,8 +201,8 @@ function lastDrinkTime() {
         const bedDate = new Date();
         bedDate.setHours(parseInt(hours), parseInt(minutes));
 
-        // Subtract 6 hours for caffeine cutoff
-        bedDate.setHours(calculateLastDrinkTime(bedDate, drink, size));
+        // Calculate last drink time
+        bedDate.setHours(calculateLastDrinkTime(bedDate, drink, size, weight, age, unitsWeekly));
 
         // Format the result time
         let resultTime;
@@ -192,41 +220,54 @@ function lastDrinkTime() {
             });
         }
 
+        console.log("Result time:", resultTime);
+
         // Display result
         document.getElementById("result-text").textContent = "Latest time for caffeine consumption: ";
         resultElement.textContent = resultTime;
         resultSection.classList.add("show"); // Show the result section
+        resultSection.style.display = "block"; // Ensure it's visible
         
         submitButton.disabled = false;
     }, 500);
 }
 
-function maxCaffeine(weight, age){
-    const mgMaxAdultPerKg = 5.7;
-    const mgMaxChildPerKg = 3;
-    const pregnantMax = 200;
+function calculateLastDrinkTime(bedDate, drink, size, weight, age, unitsWeekly) {
+    const caffeineContent = {
+        espresso: 63,
+        filterCoffee: 95,
+        nespresso: 60,
+        starbucks: 155,
+        mcdonalds: 145,
+        redbull: 80,
+        monster: 160,
+        preworkout: 200
+    };
 
-    if (age<18){
-        return weight*mgMaxChildPerKg;
-    }
-    else if (age>=18){
-        return weight*mgMaxAdultPerKg;
-    }
-}
-
-function findTolerance(weight, age, unitsWeekly){
-    const maxCaffeine = maxCaffeine(weight, age);
+    // Calculate actual caffeine intake based on drink size
+    const drinkCaffeine = (caffeineContent[drink] || 0) * (size / 240); // Normalize to 8oz (240ml)
+    const tolerance = findTolerance(weight, age, unitsWeekly);
     
-    return 
+    // Calculate metabolization rate based on individual factors
+    const baseHalfLife = 5; // Base half-life in hours
+    const adjustedHalfLife = baseHalfLife * (1 - (age - 25) * 0.01) * (1 + (weight - 70) * 0.005);
+    
+    let hoursBeforeBed = 4; // Minimum recommended hours
+    let currentCaffeineLevel = drinkCaffeine;
+    
+    // Calculate until caffeine level is below safe threshold
+    while (currentCaffeineLevel > tolerance * 0.1) {
+        hoursBeforeBed++;
+        currentCaffeineLevel = calculateCaffeineLevel(drinkCaffeine, hoursBeforeBed, adjustedHalfLife);
+        
+        if (hoursBeforeBed > 12) break; // Safety limit
+    }
+
+    return Math.max(bedDate.getHours() - hoursBeforeBed, 0);
 }
 
-function calculateLastDrinkTime(bedDate, drink, size) {
-    // Implement logic to calculate the last drink time based on the selected drink and size
-    // For now, just subtract 6 hours as a placeholder
-    let nyBedTime = bedDate.getHours();
-
-
-    return nyBedTime;
+function calculateCaffeineLevel(initialCaffeine, hours, halfLife = 5) {
+    return initialCaffeine * Math.pow(0.5, hours / halfLife);
 }
 
 // Scroll the result into view after calculation
