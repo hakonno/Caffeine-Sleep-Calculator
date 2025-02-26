@@ -140,6 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 250);
 
     window.addEventListener('resize', handleResize, { passive: true });
+
+    // Mobile menu handling
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navLinks?.classList.contains('active') && 
+            !e.target.closest('.nav-links') && 
+            !e.target.closest('.mobile-menu-toggle')) {
+            navLinks.classList.remove('active');
+        }
+    });
 });
 
 function maxCaffeineDaily(weight, age) {
@@ -274,4 +293,88 @@ function calculateCaffeineLevel(initialCaffeine, hours, halfLife = 5) {
 function scrollToElement(element) {
     const resultElement = document.querySelector(element);
     resultElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Quick check functionality
+function quickCheck() {
+    const bedtime = document.getElementById('quickBedtime').value;
+    const drink = document.getElementById('quickDrink').value;
+    
+    const bedDateTime = new Date();
+    const [hours, minutes] = bedtime.split(':');
+    bedDateTime.setHours(parseInt(hours), parseInt(minutes));
+    
+    const cutoffTime = calculateCutoff(bedDateTime, drink);
+    const currentTime = new Date();
+    const canDrink = currentTime < cutoffTime;
+
+    showQuickResult(canDrink, cutoffTime);
+    updateDangerBar(cutoffTime, bedDateTime);
+    showDrinkInfo(drink);
+}
+
+function calculateCutoff(bedtime, drinkType) {
+    const caffeineData = {
+        redbull: 80,
+        coffee: 95,
+        espresso: 63,
+        monster: 160,
+        preworkout: 200
+    };
+
+    const caffeineMg = caffeineData[drinkType];
+    const halfLife = 5; // hours
+    const safeThreshold = 40; // mg
+    
+    const hours = (Math.log(safeThreshold / caffeineMg) / Math.log(0.5)) * halfLife;
+    return new Date(bedtime - (hours * 60 * 60 * 1000));
+}
+
+function showQuickResult(canDrink, cutoffTime) {
+    const resultEl = document.getElementById('quickResult');
+    resultEl.innerHTML = `
+        <h3>${canDrink ? '✅ Safe to drink' : '⛔ Avoid drinking'}</h3>
+        <p>Latest time: ${cutoffTime.toLocaleTimeString()}</p>
+    `;
+    resultEl.classList.add('visible');
+}
+
+function updateDangerBar(cutoffTime, bedtime) {
+    const totalHours = (bedtime - cutoffTime) / (1000 * 60 * 60);
+    const dangerBar = document.querySelector('.danger-level');
+    const dangerContainer = document.querySelector('.danger-bar');
+    
+    const safePercentage = Math.min((totalHours / 8) * 100, 100);
+    dangerBar.style.width = `${safePercentage}%`;
+    
+    dangerContainer.classList.toggle('high-risk', safePercentage < 30);
+}
+
+function showDrinkInfo(drinkType) {
+    const infoMap = {
+        redbull: {
+            risk: 'high',
+            text: 'Red Bull contains 80mg caffeine per 250ml. High sugar content can amplify effects.'
+        },
+        coffee: {
+            risk: 'medium', 
+            text: 'Brewed coffee has 95mg per 200ml. Effects vary based on roast and brew time.'
+        },
+        espresso: {
+            risk: 'low',
+            text: 'Espresso shots (63mg/30ml) provide quick energy but shorter duration.'
+        }
+    };
+
+    const info = infoMap[drinkType];
+    const infoEl = document.querySelector('.drink-info');
+    infoEl.innerHTML = `
+        <p class="risk-${info.risk}">⚠️ ${info.text}</p>
+    `;
+}
+
+function showDetailedCalculator() {
+    document.querySelector('.calculator-form').scrollIntoView({
+        behavior: 'smooth'
+    });
 }

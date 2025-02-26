@@ -939,3 +939,132 @@ p {
         will-change: transform;
     }
 }
+
+/* Mobile First Navigation */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quick-calculator {
+    background: var(--container);
+    padding: 1.5rem;
+    margin: 1rem auto;
+    border-radius: 12px;
+    max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.quick-result {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.quick-result.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 4rem;
+        right: 1rem;
+        background: var(--bg-primary);
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        flex-direction: column;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+/* Enhanced Nav Links */
+.nav-link {
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: var(--hover);
+}
+
+/* Danger Zone Bar */
+.danger-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+}
+
+.danger-level {
+    height: 100%;
+    width: 0%;
+    background: #4CAF50;
+    transition: width 0.5s ease;
+}
+
+.danger-bar.high-risk .danger-level {
+    background: #f44336;
+}
+
+.drink-info {
+    padding: 1rem;
+    background: var(--container);
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.text-button {
+    background: none;
+    border: none;
+    color: var(--brand-accent);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Drink Risk Colors */
+.risk-low { color: #4CAF50; }
+.risk-medium { color: #FFC107; }
+.risk-high { color: #f44336; }

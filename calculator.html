@@ -29,12 +29,13 @@
     <!-- Navigation bar -->
     <header class="navbar">
       <nav>
-        <ul>
-          <li class="logo">
-            <h1><a href="#calculator">Caffeine & Sleep Calc.</a></h1>
-          </li>
-          <li class="nav-links">
-            <button id="darkModeToggle" aria-label="Toggle dark mode">
+        <div class="nav-container">
+          <a href="calculator.html" class="logo">CaffeineCalc</a>
+          <button class="mobile-menu-toggle" aria-label="Open menu">☰</button>
+          <div class="nav-links">
+            <a href="calculator.html" class="nav-link">Calculator</a>
+            <a href="caffeine-info.html" class="nav-link">Guide</a>
+            <button id="darkModeToggle" class="icon-button nav-link" aria-label="Toggle dark mode">
               <span id="darkModeIcon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -51,16 +52,42 @@
                 </svg>
               </span>
             </button>
-            <a href="#calculator">Calculator</a>
-            <a href="caffeine-info.html">Caffeine & Sleep</a>
-            <a href="feedback.html">Feedback</a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
     </header>
 
     <!-- Main content -->
     <main class="main-container">
+      <div class="quick-calculator">
+        <h2>Quick Check</h2>
+        <form id="quickForm" onsubmit="event.preventDefault(); quickCheck();">
+          <div class="input-group">
+            <div class="form-group">
+              <label for="quickBedtime">⏰ Bedtime</label>
+              <input type="time" id="quickBedtime" required>
+            </div>
+            <div class="form-group">
+              <label for="quickDrink">☕ Select Drink</label>
+              <select id="quickDrink" required>
+                <option value="redbull">Red Bull (80mg/250ml)</option>
+                <option value="coffee">Coffee (95mg/200ml)</option>
+                <option value="espresso">Espresso (63mg/30ml)</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="modern-button">Check Safety</button>
+        </form>
+        
+        <div id="quickResult" class="quick-result">
+          <div class="danger-bar">
+            <div class="danger-level"></div>
+          </div>
+          <div class="drink-info"></div>
+          <button class="text-button" onclick="showDetailedCalculator()">Get even more detailed →</button>
+        </div>
+      </div>
+
       <section class="main">
         <div class="hero">
           <div class="hero-content">
@@ -201,7 +228,7 @@
     </main>
 
     <!-- Result section -->
-    <section class="result" style="display: none;">
+    <section class="result" style="display: none;"></section>
       <p id="result-text"></p>
       <h1 id="result-time" class="result-time animated"></h1>
       <div >
